@@ -10,6 +10,8 @@
 #import "GPayload.h"
 #import "GServiceGateway.h"
 #import "GPUImage.h"
+#import "GGPUImageLuminosityExtractor.h"
+
 
 @interface GDarknessMapViewController ()
 
@@ -37,6 +39,7 @@
     NSLog(@"view did fucking load");
     
     [self setupVideoCamera];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -53,8 +56,11 @@
     videoCamera.horizontallyMirrorFrontFacingCamera = NO;
     videoCamera.horizontallyMirrorRearFacingCamera = NO;
     
-    filter = [[GPUImageSepiaFilter alloc] init];
-    
+//    filter = [[GPUImageSepiaFilter alloc] init];
+    filter = [[GGPUImageLuminosityExtractor alloc] init];
+
+//    ((GGPUImageLuminosityExtractor *) filter).preventRendering = TRUE;
+
     [videoCamera addTarget:filter];
     
     GPUImageView *filterView = (GPUImageView *) self.view;
@@ -62,6 +68,24 @@
     [filter addTarget:filterView];
     
     [videoCamera startCameraCapture];
+    
+    colorGenerator = [[GPUImageSolidColorGenerator alloc] init];
+    [colorGenerator forceProcessingAtSize:[filterView sizeInPixels]];
+    
+    //More fucking hoops, to retain our block...AND to have access to the context.
+    //REALLY FUCKING REALLY?!
+    __weak typeof(self) weakSelf = self;
+    callbackBlock = ^(CGFloat luminosity, CMTime frameTime) {
+        typeof(self) strongSelf = weakSelf;
+        [strongSelf->colorGenerator setColorRed:luminosity green:luminosity blue:luminosity alpha:0];
+        strongSelf.luminosity = [NSNumber numberWithFloat:luminosity];
+        NSLog(@"we are fucking here: %f", luminosity);
+    };
+    
+    [(GGPUImageLuminosityExtractor *)filter setLuminosityCallbackBlock:callbackBlock];
+    
+    
+    [colorGenerator addTarget:filterView];
     
     /*
     double delayToStartRecording = 0.5;

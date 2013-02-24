@@ -10,21 +10,28 @@
 #import "GCoreGPSController.h"
 #import "GPUImage.h"
 
+typedef void(^BlockLuminosityProcessingFinished)(CGFloat luminosity, CMTime frameTime);
 
 @interface GDarknessMapViewController : UIViewController <GCoreGPSControllerDelegate> {
-	GCoreGPSController *CLController;
-	IBOutlet UILabel *locLabel;
+	
+    GCoreGPSController *CLController;
+//	IBOutlet UILabel *locLabel;
     
     //
     GPUImageVideoCamera *videoCamera;
     GPUImageOutput<GPUImageInput> *filter;
     GPUImageMovieWriter *movieWriter;
+    GPUImageSolidColorGenerator *colorGenerator;
+    BlockLuminosityProcessingFinished callbackBlock;
 }
 
-@property (nonatomic, strong) GCoreGPSController *CLController;
+//@property(nonatomic, copy) void(^luminosityProcessingFinishedBlock)(CGFloat luminosity, CMTime frameTime);
+
+@property (strong, nonatomic) GCoreGPSController *CLController;
 @property (strong, nonatomic) IBOutlet UILabel *locLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
+@property (strong, nonatomic) NSNumber *luminosity;
 @property (strong, nonatomic) CLLocation* location;
 @property (strong, nonatomic) NSMutableDictionary* payloadObject;
 

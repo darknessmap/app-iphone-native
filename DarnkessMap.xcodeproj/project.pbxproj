@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9342BF0516DAD2A000825A73 /* GGPUImageLuminosityExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342BF0416DAD2A000825A73 /* GGPUImageLuminosityExtractor.m */; };
 		93F59C0F16D9BEC3002FE17B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C0E16D9BEC3002FE17B /* CoreMedia.framework */; };
 		93F59C1116D9BECD002FE17B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1016D9BECD002FE17B /* CoreVideo.framework */; };
 		93F59C1316D9BED5002FE17B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1216D9BED5002FE17B /* OpenGLES.framework */; };
@@ -64,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9342BF0316DAD2A000825A73 /* GGPUImageLuminosityExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPUImageLuminosityExtractor.h; sourceTree = "<group>"; };
+		9342BF0416DAD2A000825A73 /* GGPUImageLuminosityExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPUImageLuminosityExtractor.m; sourceTree = "<group>"; };
 		93F59BF716D9BD42002FE17B /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		93F59C0E16D9BEC3002FE17B /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		93F59C1016D9BECD002FE17B /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -126,6 +129,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9342BF0016DAD27500825A73 /* filters */ = {
+			isa = PBXGroup;
+			children = (
+				9342BF0316DAD2A000825A73 /* GGPUImageLuminosityExtractor.h */,
+				9342BF0416DAD2A000825A73 /* GGPUImageLuminosityExtractor.m */,
+			);
+			name = filters;
+			sourceTree = "<group>";
+		};
 		93F59BF816D9BD42002FE17B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +184,7 @@
 		93F7707616D92C7D00CACAA8 /* DarnkessMap */ = {
 			isa = PBXGroup;
 			children = (
+				9342BF0016DAD27500825A73 /* filters */,
 				93F7710B16D9673C00CACAA8 /* images */,
 				93F770B416D942F200CACAA8 /* service */,
 				93F7707F16D92C7D00CACAA8 /* GAppDelegate.h */,
@@ -334,6 +347,7 @@
 				93F770B916D9431400CACAA8 /* GPayload.m in Sources */,
 				93F770BA16D9431400CACAA8 /* GServiceGateway.m in Sources */,
 				93F7710516D94FB500CACAA8 /* GCoreGPSController.m in Sources */,
+				9342BF0516DAD2A000825A73 /* GGPUImageLuminosityExtractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
