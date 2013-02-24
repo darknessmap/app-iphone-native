@@ -18,7 +18,7 @@
 @property (assign, nonatomic) NSInteger* time;
 
 //TODO: Give it a fucking real name, yo! 
-@property (strong, nonatomic) NSDictionary* dictionary;
+@property (assign, nonatomic) NSDictionary* dictionary;
 
 
 - (id) initWithUid:(NSString*)Uid sid:(NSString*)Sid;

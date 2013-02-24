@@ -9,6 +9,7 @@
 #import "GDarknessMapViewController.h"
 #import "GPayload.h"
 #import "GServiceGateway.h"
+#import "GPUImage.h"
 
 @interface GDarknessMapViewController ()
 
@@ -18,29 +19,93 @@
 
 @implementation GDarknessMapViewController
 
-@synthesize locLabel, CLController, location, payloadObject;
+@synthesize locLabel;
+@synthesize timeLabel;
+@synthesize CLController;
+@synthesize location, payloadObject;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
+	
+    //Fire location shait.
 	CLController = [[GCoreGPSController alloc] init];
 	CLController.delegate = self;
 	[CLController.locMgr startUpdatingLocation];
+    
+    //uh?
+    NSLog(@"view did fucking load");
+    
+    [self setupVideoCamera];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [videoCamera startCameraCapture];
+}
+
+-(void) setupVideoCamera
+{
+    //TODO: WE NEED THE CAMERA TO FILL PARENT CONTAINER FOR ALL DEVICES...
+    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPresetHigh  cameraPosition:AVCaptureDevicePositionBack];
+    
+    videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
+    videoCamera.horizontallyMirrorFrontFacingCamera = NO;
+    videoCamera.horizontallyMirrorRearFacingCamera = NO;
+    
+    filter = [[GPUImageSepiaFilter alloc] init];
+    
+    [videoCamera addTarget:filter];
+    
+    GPUImageView *filterView = (GPUImageView *) self.view;
+    
+    [filter addTarget:filterView];
+    
+    [videoCamera startCameraCapture];
+    
+    /*
+    double delayToStartRecording = 0.5;
+    dispatch_time_t startTime = dispatch_time(DISPATCH_TIME_NOW, delayToStartRecording * NSEC_PER_SEC);
+    dispatch_after(startTime, dispatch_get_main_queue(), ^(void){
+        NSLog(@"Start recording");
+        
+        
+        
+        double delayInSeconds = 10.0;
+        dispatch_time_t stopTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(stopTime, dispatch_get_main_queue(), ^(void){
+            
+                        NSLog(@"Movie completed");
+            
+        });
+    });
+    */
+
+}
+
+
 - (void)locationUpdate:(CLLocation *)aLocation {
+    
     self.location = aLocation;
     
-	locLabel.text = [self.location description];
+    double latDouble = [self.location coordinate].latitude;
+    double lonDouble = [self.location coordinate].longitude;
     
-    //test the fucking JSONnify of the payload.
+	locLabel.text = [NSString stringWithFormat:@"Lat: %f Lon: %f", latDouble, lonDouble];
     
-    NSNumber* lon = [NSNumber numberWithDouble:34.5555333];
-    NSNumber* lat = [NSNumber numberWithDouble:72.3434423];
-    int time = 222222222;
-    NSInteger* timestamp = &time;
+    
+    //TODO: Format timestamp for display?
+    NSDate *date = [self.location timestamp];
+    NSTimeInterval interval = [date timeIntervalSince1970];
+    NSInteger timestamp = round(interval);
+    
+    timeLabel.text = [NSString stringWithFormat:@"Time: %ld", (long)timestamp];
+    
+    
+    NSNumber* lon = [NSNumber numberWithDouble:latDouble];
+    NSNumber* lat = [NSNumber numberWithDouble:lonDouble];
+    
+    
     NSString* uid = @"lasdjflajdsfl";
     NSString* sid = @"lasdjflajdsfl";
     
@@ -49,8 +114,8 @@
     NSDictionary* loc = [NSDictionary dictionaryWithObjectsAndKeys:lon,@"lon", lat, @"lat",nil];
     
     [payload setPayload:lon
-               location:loc
-              timestamp:timestamp];
+             location:loc
+             timestamp:&timestamp];
     
     payloadObject = [NSMutableDictionary dictionary];
     
@@ -78,6 +143,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // Note: I needed to stop camera capture before the view went off the screen in order to prevent a crash from the camera still sending frames
+    [videoCamera stopCameraCapture];
+    
+	[super viewWillDisappear:animated];
 }
 
 
