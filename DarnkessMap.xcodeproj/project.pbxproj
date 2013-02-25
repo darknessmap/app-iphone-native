@@ -12,6 +12,7 @@
 		936991DF16DB0B3C00D73E4A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 936991DE16DB0B3C00D73E4A /* icon.png */; };
 		936991E116DB0B8700D73E4A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936991E016DB0B8700D73E4A /* icon@2x.png */; };
 		936991E316DB0B8C00D73E4A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936991E216DB0B8C00D73E4A /* icon@2x.png */; };
+		936991E516DB0DA100D73E4A /* icon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 936991E416DB0DA100D73E4A /* icon1024.png */; };
 		93F59C0F16D9BEC3002FE17B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C0E16D9BEC3002FE17B /* CoreMedia.framework */; };
 		93F59C1116D9BECD002FE17B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1016D9BECD002FE17B /* CoreVideo.framework */; };
 		93F59C1316D9BED5002FE17B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1216D9BED5002FE17B /* OpenGLES.framework */; };
@@ -75,6 +76,7 @@
 		936991DE16DB0B3C00D73E4A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		936991E016DB0B8700D73E4A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		936991E216DB0B8C00D73E4A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		936991E416DB0DA100D73E4A /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1024.png; sourceTree = "<group>"; };
 		93F59BF716D9BD42002FE17B /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		93F59C0E16D9BEC3002FE17B /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		93F59C1016D9BECD002FE17B /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -243,6 +245,7 @@
 		93F7710B16D9673C00CACAA8 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				936991E416DB0DA100D73E4A /* icon1024.png */,
 				936991E016DB0B8700D73E4A /* icon@2x.png */,
 				936991DC16DB0B2E00D73E4A /* icon.png */,
 				93F7711016D9686300CACAA8 /* photo.png */,
@@ -346,6 +349,7 @@
 				936991DF16DB0B3C00D73E4A /* icon.png in Resources */,
 				936991E116DB0B8700D73E4A /* icon@2x.png in Resources */,
 				936991E316DB0B8C00D73E4A /* icon@2x.png in Resources */,
+				936991E516DB0DA100D73E4A /* icon1024.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
