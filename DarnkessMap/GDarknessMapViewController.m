@@ -11,7 +11,7 @@
 #import "GServiceGateway.h"
 #import "GPUImage.h"
 #import "GGPUImageLuminosityExtractor.h"
-
+#import "GAppDelegate.h"
 
 @interface GDarknessMapViewController ()
 
@@ -23,6 +23,7 @@
 
 @synthesize locLabel;
 @synthesize timeLabel;
+@synthesize lumiLabel;
 @synthesize CLController;
 @synthesize location, payloadObject;
 
@@ -56,10 +57,7 @@
     videoCamera.horizontallyMirrorFrontFacingCamera = NO;
     videoCamera.horizontallyMirrorRearFacingCamera = NO;
     
-//    filter = [[GPUImageSepiaFilter alloc] init];
     filter = [[GGPUImageLuminosityExtractor alloc] init];
-
-//    ((GGPUImageLuminosityExtractor *) filter).preventRendering = TRUE;
 
     [videoCamera addTarget:filter];
     
@@ -69,23 +67,19 @@
     
     [videoCamera startCameraCapture];
     
-    colorGenerator = [[GPUImageSolidColorGenerator alloc] init];
-    [colorGenerator forceProcessingAtSize:[filterView sizeInPixels]];
-    
     //More fucking hoops, to retain our block...AND to have access to the context.
     //REALLY FUCKING REALLY?!
     __weak typeof(self) weakSelf = self;
     callbackBlock = ^(CGFloat luminosity, CMTime frameTime) {
         typeof(self) strongSelf = weakSelf;
-        [strongSelf->colorGenerator setColorRed:luminosity green:luminosity blue:luminosity alpha:0];
         strongSelf.luminosity = [NSNumber numberWithFloat:luminosity];
-        NSLog(@"we are fucking here: %f", luminosity);
+        //strongSelf.lumiLabel.text = [NSString stringWithFormat:@"Brightness: %f", luminosity];
+//        NSLog(@"we are fucking here: %f", luminosity);
     };
     
+    [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabelTimer:) userInfo:nil repeats:YES];
+    
     [(GGPUImageLuminosityExtractor *)filter setLuminosityCallbackBlock:callbackBlock];
-    
-    
-    [colorGenerator addTarget:filterView];
     
     /*
     double delayToStartRecording = 0.5;
@@ -106,7 +100,10 @@
     */
 
 }
-
+- (void)updateLabelTimer:(NSTimer *)timer
+{
+    self.lumiLabel.text = [NSString stringWithFormat:@"Brightness: %@", self.luminosity];
+}
 
 - (void)locationUpdate:(CLLocation *)aLocation {
     
@@ -129,15 +126,16 @@
     NSNumber* lon = [NSNumber numberWithDouble:latDouble];
     NSNumber* lat = [NSNumber numberWithDouble:lonDouble];
     
+    //TODO: get actual values...
     
-    NSString* uid = @"lasdjflajdsfl";
-    NSString* sid = @"lasdjflajdsfl";
+    NSString* uid = [(GAppDelegate *)[[UIApplication sharedApplication] delegate] UID];
+    NSString* sid = [(GAppDelegate *)[[UIApplication sharedApplication] delegate] SID];
     
     GPayload* payload = [[GPayload alloc] initWithUid:uid sid:sid];
     
     NSDictionary* loc = [NSDictionary dictionaryWithObjectsAndKeys:lon,@"lon", lat, @"lat",nil];
     
-    [payload setPayload:lon
+    [payload setPayload:self.luminosity
              location:loc
              timestamp:&timestamp];
     
@@ -150,8 +148,8 @@
     
     GServiceGateway* gateway = [[GServiceGateway alloc] init];
     
-    //TODO: Get the IP/end point url from a config file :)
-    NSString* url = @"http://192.168.208.148/phpTest/server/index.php";
+    //TODO: Get the IP/end point url from a config file :)http://localhost:9090/api/darkness
+    NSString* url = @"http://178.79.145.84:8080/api/darkness";
     NSDictionary* data = [NSDictionary dictionaryWithObjectsAndKeys:json,@"data", nil];
     
     [gateway connectionPOST:url withParams:data];

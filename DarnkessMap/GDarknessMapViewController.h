@@ -21,7 +21,6 @@ typedef void(^BlockLuminosityProcessingFinished)(CGFloat luminosity, CMTime fram
     GPUImageVideoCamera *videoCamera;
     GPUImageOutput<GPUImageInput> *filter;
     GPUImageMovieWriter *movieWriter;
-    GPUImageSolidColorGenerator *colorGenerator;
     BlockLuminosityProcessingFinished callbackBlock;
 }
 
@@ -30,11 +29,13 @@ typedef void(^BlockLuminosityProcessingFinished)(CGFloat luminosity, CMTime fram
 @property (strong, nonatomic) GCoreGPSController *CLController;
 @property (strong, nonatomic) IBOutlet UILabel *locLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *lumiLabel;
 
 @property (strong, nonatomic) NSNumber *luminosity;
 @property (strong, nonatomic) CLLocation* location;
 @property (strong, nonatomic) NSMutableDictionary* payloadObject;
 
--(void) setupVideoCamera;
+- (void) setupVideoCamera;
+- (void)updateLabelTimer:(NSTimer *)timer;
 
 @end

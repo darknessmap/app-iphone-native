@@ -18,9 +18,11 @@
 	if(self != nil) {
         // Create new instance of locMgr
 		self.locMgr = [[CLLocationManager alloc] init];
-        self.locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+//        self.locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+        self.locMgr.desiredAccuracy = kCLLocationAccuracyBest;
         self.locMgr.purpose = @"Relate darkness average to location.";
-        self.locMgr.distanceFilter = 45;
+//        self.locMgr.distanceFilter = 45;
+        self.locMgr.distanceFilter = 0;
         
         // Set the delegate as self.
 		self.locMgr.delegate = self;
