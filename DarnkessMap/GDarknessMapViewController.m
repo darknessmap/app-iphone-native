@@ -63,6 +63,10 @@
     
     GPUImageView *filterView = (GPUImageView *) self.view;
     
+    filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+    
+
+    
     [filter addTarget:filterView];
     
     [videoCamera startCameraCapture];
