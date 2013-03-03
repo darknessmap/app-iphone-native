@@ -18,7 +18,7 @@
 		93F59C1316D9BED5002FE17B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1216D9BED5002FE17B /* OpenGLES.framework */; };
 		93F59C1516D9BEE3002FE17B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1416D9BEE3002FE17B /* AVFoundation.framework */; };
 		93F59C1716D9BEEA002FE17B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1616D9BEEA002FE17B /* QuartzCore.framework */; };
-		93F59C1816D9C0D9002FE17B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59BFE16D9BD43002FE17B /* libGPUImage.a */; };
+		93F59C1816D9C0D9002FE17B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59BFE16D9BD43002FE17B /* libGPUImage.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		93F7707116D92C7D00CACAA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F7707016D92C7D00CACAA8 /* UIKit.framework */; };
 		93F7707316D92C7D00CACAA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F7707216D92C7D00CACAA8 /* Foundation.framework */; };
 		93F7707516D92C7D00CACAA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F7707416D92C7D00CACAA8 /* CoreGraphics.framework */; };
@@ -442,7 +442,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Genevieve Hoffman";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Genevieve Hoffman";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -450,6 +451,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "5C3B1249-6706-4761-8878-0C308BA1B95D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5C3B1249-6706-4761-8878-0C308BA1B95D";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -474,6 +477,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Genevieve Hoffman";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Genevieve Hoffman";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DarnkessMap/DarnkessMap-Prefix.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "\"../../GPUImage/framework\"/**";
@@ -481,6 +486,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5C3B1249-6706-4761-8878-0C308BA1B95D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5C3B1249-6706-4761-8878-0C308BA1B95D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
