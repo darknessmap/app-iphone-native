@@ -2,7 +2,6 @@
 #import "GPUImage.h"
 
 
-
 NSString *const akGPUImageRGBFragmentShaderString = SHADER_STRING
 (
  varying highp vec2 textureCoordinate;
@@ -18,7 +17,7 @@ NSString *const akGPUImageRGBFragmentShaderString = SHADER_STRING
      
      gl_FragColor = vec4(textureColor.r * red, textureColor.g * green, textureColor.b * blue, 1.0);
  }
-);
+ );
 
 
 //@implementation GPUImageLuminosity
@@ -26,6 +25,7 @@ NSString *const akGPUImageRGBFragmentShaderString = SHADER_STRING
 
 @synthesize red = _red, blue = _blue, green = _green;
 @synthesize luminosityCallbackBlock = _luminosityCallbackBlock;
+@synthesize delegate;
 
 #pragma mark -
 #pragma mark Initialization and teardown
@@ -36,12 +36,13 @@ NSString *const akGPUImageRGBFragmentShaderString = SHADER_STRING
     {
 		return nil;
     }
-
+    
     
     __unsafe_unretained GGPUImageLuminosityExtractor *weakSelf = self;
     [self setFrameProcessingCompletionBlock:^(GPUImageOutput *filter, CMTime frameTime) {
         [weakSelf extractLuminosityAtFrameTime:frameTime];
     }];
+    
     
     
     redUniform = [filterProgram uniformIndex:@"red"];
@@ -62,7 +63,7 @@ NSString *const akGPUImageRGBFragmentShaderString = SHADER_STRING
 
 - (void)extractLuminosityAtFrameTime:(CMTime)frameTime;
 {
-//    CGSize finalStageSize = [[stageSizes lastObject] CGSizeValue];
+    //    CGSize finalStageSize = [[stageSizes lastObject] CGSizeValue];
     NSUInteger totalNumberOfPixels = round(600*400);
     
     if (rawImagePixels == NULL)
@@ -82,10 +83,14 @@ NSString *const akGPUImageRGBFragmentShaderString = SHADER_STRING
     
     CGFloat normalizedLuminosityTotal = ((CGFloat)luminanceTotal / (CGFloat)totalNumberOfPixels / 255.0) * 255.0;
     
+    
+    
+    
     if (_luminosityCallbackBlock != NULL)
     {
         _luminosityCallbackBlock(normalizedLuminosityTotal, frameTime);
     }
+    
 }
 
 - (void)setRed:(CGFloat)newValue;

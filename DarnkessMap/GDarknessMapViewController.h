@@ -9,13 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "GCoreGPSController.h"
 #import "GPUImage.h"
+#import "GraphView.h"
+#import "GGPUImageLuminosityExtractor.h"
+
 
 typedef void(^BlockLuminosityProcessingFinished)(CGFloat luminosity, CMTime frameTime);
 
-@interface GDarknessMapViewController : UIViewController <GCoreGPSControllerDelegate> {
+@interface GDarknessMapViewController : UIViewController <GCoreGPSControllerDelegate, LumaDelegate> {
 	
     GCoreGPSController *CLController;
-//	IBOutlet UILabel *locLabel;
+    //	IBOutlet UILabel *locLabel;
     
     //
     GPUImageVideoCamera *videoCamera;
@@ -34,6 +37,8 @@ typedef void(^BlockLuminosityProcessingFinished)(CGFloat luminosity, CMTime fram
 @property (strong, nonatomic) NSNumber *luminosity;
 @property (strong, nonatomic) CLLocation* location;
 @property (strong, nonatomic) NSMutableDictionary* payloadObject;
+
+@property (strong, nonatomic) GraphView * graphView;
 
 - (void) setupVideoCamera;
 - (void)updateLabelTimer:(NSTimer *)timer;

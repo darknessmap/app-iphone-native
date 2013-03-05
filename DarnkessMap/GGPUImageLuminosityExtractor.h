@@ -7,6 +7,13 @@
 //
 #import "GPUImageAverageColor.h"
 
+@protocol LumaDelegate
+
+//callback
+- (void) changeLuma: (CGFloat) lumaValue;
+
+@end
+
 @interface GGPUImageLuminosityExtractor : GPUImageFilter
 {
     GLint redUniform;
@@ -25,6 +32,7 @@
 // This block is called on the completion of color averaging for a frame
 @property(nonatomic, copy) void(^luminosityCallbackBlock)(CGFloat time, CMTime frameTime);
 
+@property (nonatomic, assign) id<LumaDelegate> delegate;
 @property (readwrite, nonatomic) CGFloat red;
 @property (readwrite, nonatomic) CGFloat green;
 @property (readwrite, nonatomic) CGFloat blue;
