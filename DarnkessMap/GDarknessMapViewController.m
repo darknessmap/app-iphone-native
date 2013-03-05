@@ -26,18 +26,26 @@
 @synthesize lumiLabel;
 @synthesize CLController;
 @synthesize location, payloadObject;
+@synthesize graphView;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.view setOpaque:NO];
+    [self.view setBackgroundColor: [UIColor clearColor] ];
 	
-    //Fire location shait.
+    //Fire location stuff.
 	CLController = [[GCoreGPSController alloc] init];
 	CLController.delegate = self;
 	[CLController.locMgr startUpdatingLocation];
     
     //uh?
-    NSLog(@"view did fucking load");
+    NSLog(@"view did load");
+    
+    graphView = [[GraphView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 114, 320, 70)];
+    
+    [self.view addSubview:graphView];
     
     [self setupVideoCamera];
     
@@ -72,15 +80,23 @@
     
     [videoCamera startCameraCapture];
     
-    //More fucking hoops, to retain our block...AND to have access to the context.
-    //REALLY FUCKING REALLY?!
+    //More  hoops, to retain our block...AND to have access to the context.
     __weak typeof(self) weakSelf = self;
     callbackBlock = ^(CGFloat luminosity, CMTime frameTime) {
         typeof(self) strongSelf = weakSelf;
         strongSelf.luminosity = [NSNumber numberWithFloat:luminosity];
+        
+        dispatch_async(dispatch_get_main_queue(),  ^{
+            
+            strongSelf.graphView.rectColor = luminosity/255.0;
+            [strongSelf.graphView setNeedsDisplay];
+            
+        });
+        
         //strongSelf.lumiLabel.text = [NSString stringWithFormat:@"Brightness: %f", luminosity];
-//        NSLog(@"we are fucking here: %f", luminosity);
+//        NSLog(@"luminosity: %f", luminosity);
     };
+    NSLog(@" <<<<<<< THREAD %@", [NSThread currentThread]);
     
     [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabelTimer:) userInfo:nil repeats:YES];
     
@@ -148,7 +164,7 @@
     
     NSString* json = [payload getAsJsonString:payloadObject];
     
-    NSLog(@"fuck: %@", json);
+    NSLog(@"json: %@", json);
    
     
     GServiceGateway* gateway = [[GServiceGateway alloc] init];

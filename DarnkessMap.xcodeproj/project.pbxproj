@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5CF94B2716E595D7004A7E20 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF94B2616E595D7004A7E20 /* GraphView.m */; };
 		9342BF0516DAD2A000825A73 /* GGPUImageLuminosityExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342BF0416DAD2A000825A73 /* GGPUImageLuminosityExtractor.m */; };
 		936991DD16DB0B2E00D73E4A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 936991DC16DB0B2E00D73E4A /* icon.png */; };
 		936991DF16DB0B3C00D73E4A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 936991DE16DB0B3C00D73E4A /* icon.png */; };
@@ -18,7 +19,7 @@
 		93F59C1316D9BED5002FE17B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1216D9BED5002FE17B /* OpenGLES.framework */; };
 		93F59C1516D9BEE3002FE17B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1416D9BEE3002FE17B /* AVFoundation.framework */; };
 		93F59C1716D9BEEA002FE17B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59C1616D9BEEA002FE17B /* QuartzCore.framework */; };
-		93F59C1816D9C0D9002FE17B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59BFE16D9BD43002FE17B /* libGPUImage.a */; };
+		93F59C1816D9C0D9002FE17B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F59BFE16D9BD43002FE17B /* libGPUImage.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		93F7707116D92C7D00CACAA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F7707016D92C7D00CACAA8 /* UIKit.framework */; };
 		93F7707316D92C7D00CACAA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F7707216D92C7D00CACAA8 /* Foundation.framework */; };
 		93F7707516D92C7D00CACAA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F7707416D92C7D00CACAA8 /* CoreGraphics.framework */; };
@@ -70,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5CF94B2516E595D7004A7E20 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		5CF94B2616E595D7004A7E20 /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 		9342BF0316DAD2A000825A73 /* GGPUImageLuminosityExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPUImageLuminosityExtractor.h; sourceTree = "<group>"; };
 		9342BF0416DAD2A000825A73 /* GGPUImageLuminosityExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPUImageLuminosityExtractor.m; sourceTree = "<group>"; };
 		936991DC16DB0B2E00D73E4A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 				93F770B416D942F200CACAA8 /* service */,
 				93F7707F16D92C7D00CACAA8 /* GAppDelegate.h */,
 				93F7708016D92C7D00CACAA8 /* GAppDelegate.m */,
+				5CF94B2516E595D7004A7E20 /* GraphView.h */,
+				5CF94B2616E595D7004A7E20 /* GraphView.m */,
 				93F7708816D92C7D00CACAA8 /* MainStoryboard.storyboard */,
 				93F7708B16D92C7D00CACAA8 /* GAboutViewController.h */,
 				93F7708C16D92C7D00CACAA8 /* GAboutViewController.m */,
@@ -368,6 +373,7 @@
 				93F770BA16D9431400CACAA8 /* GServiceGateway.m in Sources */,
 				93F7710516D94FB500CACAA8 /* GCoreGPSController.m in Sources */,
 				9342BF0516DAD2A000825A73 /* GGPUImageLuminosityExtractor.m in Sources */,
+				5CF94B2716E595D7004A7E20 /* GraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +448,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -450,6 +457,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -474,6 +483,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Genevieve Hoffman";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Genevieve Hoffman";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DarnkessMap/DarnkessMap-Prefix.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "\"../../GPUImage/framework\"/**";
@@ -481,6 +492,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5C3B1249-6706-4761-8878-0C308BA1B95D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5C3B1249-6706-4761-8878-0C308BA1B95D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
