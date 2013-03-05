@@ -63,6 +63,7 @@
     
     GPUImageView *filterView = (GPUImageView *) self.view;
     
+    //make camera fill whole container.
     filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
     
 
